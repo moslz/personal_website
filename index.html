@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>My Personal Website</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="mediaqueries.css">
+    </head>
+    <body> 
+        <nav id="desktop-nav">
+            <div class="logo">Mohammad Seyedalizadeh</div>
+            <div> 
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav id="hamburger-nav">
+            <div class="logo">Mohammad Seyedalizadeh</div>
+            <div class="hamburger-menu">
+                <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            </div>
+        </div>
+        </nav>
+        <section id="profile">
+            <div class="section__pic-container">
+                <img src="./resources/Img_profile_1.PNG" alt="Mohammad Seyedalizadeh profile picture">
+            </div>
+            <div class="section__text">
+                <p class="section__text__p1">Hallo, ich bin</p>
+                <h1 class="title">Mohammad</h1>
+                <p class="section__text__p2">Ein Software-Entwickler</p>
+                <div class="btn-container">
+                    <button class="btn btn-color-2" onclick="window.open('./resources/Lebenslauf.pdf')">Lebenslauf herunterladen</button>
+                    <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact Info</button>
+                </div>
+                <div id="socials-container">
+                    <img src="./resources/linkedin.png" alt="My LinkedIn profile"
+                    class="icon" onclick="location.href='https://www.linkedin.com/in/mohammad-seyedalizadeh-1809a8155/'">
+                    <img src="./resources/github.png" alt="My Github profile"
+                    class="icon" onclick="location.href='https://github.com/moslz/'">
+                </div>
+            </div>
+        </section>
+        <section></section>
+        <script src="script.js"></script>
+    </body>
+</html>
