@@ -1,87 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>My Personal Website</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="mediaqueries.css">
-    </head>
-    <body> 
-        <nav id="desktop-nav">
-            <div class="logo">Mohammad Seyedalizadeh</div>
-            <div> 
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-        <nav id="hamburger-nav">
-            <div class="logo">Mohammad Seyedalizadeh</div>
-            <div class="hamburger-menu">
-                <div class="hamburger-icon" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="menu-links">
-                <li><a href="#about" onclick="toggleMenu()">About</a></li>
-                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-            </div>
+<html lang="de" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohammad Seyedalizadeh – Personal Website</title>
+    <!-- Google Font (Latin and Persian support) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Noto+Sans+Arabic&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <!-- Hamburger icon for mobile -->
+      <div class="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation menu (collapsible) -->
+      <ul id="nav-menu">
+        <li><a href="#home" data-i18n="navHome">Start</a></li>
+        <li><a href="#about" data-i18n="navAbout">Über mich</a></li>
+        <li><a href="#experience" data-i18n="navExperience">Erfahrung</a></li>
+        <li><a href="#skills" data-i18n="navSkills">Kenntnisse</a></li>
+        <li><a href="#projects" data-i18n="navProjects">Projekte</a></li>
+        <li><a href="#contact" data-i18n="navContact">Kontakt</a></li>
+        <!-- Language and theme controls -->
+        <li class="controls">
+          <span class="lang-toggle">
+            <button type="button" data-lang="de" class="active-lang">DE</button>
+            | <button type="button" data-lang="en">EN</button> |
+          </span>
+          <button type="button" id="theme-toggle" aria-label="Toggle dark mode">
+            🌙
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+      <div class="intro-container">
+        <!-- Profile picture -->
+        <img
+          src="resources/Img_profile_1.PNG"
+          alt="Profile Picture"
+          class="profile-pic"
+        />
+        <div class="intro-text">
+          <h1>Mohammad Seyedalizadeh</h1>
+          <p class="tagline" data-i18n="homeIntro">
+            Softwareentwickler &amp; Masterstudent (Medieninformatik)
+          </p>
         </div>
-        </nav>
-        <section id="profile">
-            <div class="section__pic-container">
-                <img src="./resources/Img_profile_1.PNG" alt="Mohammad Seyedalizadeh profile picture">
-            </div>
-            <div class="section__text">
-                <p class="section__text__p1">Hello, I'm</p>
-                <h1 class="title">Mohammad</h1>
-                <p class="section__text__p2">A Graduate Computer Science Student</p>
-                <div class="btn-container">
-                    <button class="btn btn-color-2" onclick="window.open('./resources/Lebenslauf.pdf')">Download CV</button>
-                    <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact Info</button>
-                </div>
-                <div id="socials-container">
-                    <img src="./resources/linkedin.png" alt="My LinkedIn profile"
-                    class="icon" onclick="location.href='https://www.linkedin.com/in/mohammad-seyedalizadeh-1809a8155/'">
-                    <img src="./resources/github.png" alt="My Github profile"
-                    class="icon" onclick="location.href='https://github.com/moslz/'">
-                </div>
-            </div>
-        </section>
-        <section id="about">
-            <p class="section__text__p1">Get To Know More</p>
-            <h1 class="title">About Me</h1>
-            <div class="section-container">
-                <div class="section__pic-container">
-                  <img src="./resources/about-pic.JPG" alt="Profile picture" class="about-pic"/>
-                </div>
-                <div class="about-details-container">
-                    <div class="about-containers">
-                        <div class="details-container">
-                            <img src="./resources/experience.png" alt="Experience icon" class="icon"/>
-                            <h3>Experience</h3>
-                            <p>6 Months <br>Python Development</p>
-                        </div>
-                        <div class="details-container">
-                            <img src="./resources/education.png" alt="Education icon" class="icon"/>
-                            <h3>Education</h3>
-                            <p>B.Eng Bachelors Degree<br/>M.Sc. Master Degree</p>
-                        </div>
-                    </div>
-                    <div class="text-container">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex placeat soluta consequatur dolor autem tempora, rerum id, sapiente illum eaque rem! Et, placeat provident quisquam aliquam quam temporibus debitis quo eos! Dignissimos expedita neque repellat fuga dicta dolor quidem, ipsam illum ad! Aut est quo illum excepturi deserunt? Dignissimos, quae.</p>
-                    </div>
-                </div>
-            </div>
-            <img src="./resources/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'"/>
-        </section>
-        <script src="script.js"></script>
-    </body>
+      </div>
+      <!-- Down arrow to scroll to About section -->
+      <a href="#about" class="down-arrow-link" aria-label="Scroll Down">
+        <img src="resources/arrow.png" alt="" class="down-arrow icon" />
+      </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 data-i18n="aboutTitle">Über mich</h2>
+      <p data-i18n="aboutPara1">
+        Ich bin Softwareentwickler und Masterstudent im Fach Medieninformatik an
+        der Bauhaus-Universität Weimar. Meinen Bachelor-Abschluss in
+        Computertechnik habe ich an der IAU Teheran Nord erworben.
+      </p>
+      <p data-i18n="aboutPara2">
+        Ich habe als Hiwi-Tutor gearbeitet und war als Softwareentwickler am
+        Helmholtz-Zentrum Hereon tätig. Besonders interessiere ich mich für
+        Webentwicklung, maschinelles Lernen und die Verarbeitung natürlicher
+        Sprache (Natural Language Processing).
+      </p>
+      <p data-i18n="aboutPara3">
+        Ich habe als Hiwi-Tutor gearbeitet und war als Softwareentwickler am
+        Helmholtz-Zentrum Hereon tätig. Besonders interessiere ich mich für
+        Webentwicklung, maschinelles Lernen und die Verarbeitung natürlicher
+        Sprache (Natural Language Processing).
+      </p>
+      <p data-i18n="aboutPara4">
+        Ich habe als Hiwi-Tutor gearbeitet und war als Softwareentwickler am
+        Helmholtz-Zentrum Hereon tätig. Besonders interessiere ich mich für
+        Webentwicklung, maschinelles Lernen und die Verarbeitung natürlicher
+        Sprache (Natural Language Processing).
+      </p>
+      <p data-i18n="aboutPara5">
+        Ich habe als Hiwi-Tutor gearbeitet und war als Softwareentwickler am
+        Helmholtz-Zentrum Hereon tätig. Besonders interessiere ich mich für
+        Webentwicklung, maschinelles Lernen und die Verarbeitung natürlicher
+        Sprache (Natural Language Processing).
+      </p>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <h2 data-i18n="expTitle">Erfahrung</h2>
+      <!-- Work Experience -->
+      <h3>
+        <img src="experience.png" alt="" class="icon section-icon" />
+        <span data-i18n="workTitle">Berufserfahrung</span>
+      </h3>
+      <ul class="experience-list work-list">
+        <li>
+          <strong data-i18n="job1_role">Hiwi-Tutor</strong>,
+          <span data-i18n="job1_org">Bauhaus-Universität Weimar</span>
+          (<span data-i18n="job1_date">Jan 2023 – Dez 2023</span>) –
+          <span data-i18n="job1_desc"
+            >Betreuung von Studierenden in Programmierkursen.</span
+          >
+        </li>
+        <li>
+          <strong data-i18n="job2_role">Softwareentwickler</strong>,
+          <span data-i18n="job2_org">Helmholtz-Zentrum Hereon</span>
+          (<span data-i18n="job2_date">Feb 2024 – Jul 2024</span>) –
+          <span data-i18n="job2_desc"
+            >Webentwicklung mit Python (Flask), JavaScript und Neo4j.</span
+          >
+        </li>
+      </ul>
+      <!-- Education -->
+      <h3>
+        <img src="education.png" alt="" class="icon section-icon" />
+        <span data-i18n="eduTitle">Ausbildung</span>
+      </h3>
+      <ul class="experience-list edu-list">
+        <li>
+          <strong data-i18n="edu1_degree">M.Sc. Medieninformatik</strong>,
+          <span data-i18n="edu1_school">Bauhaus-Universität Weimar</span>
+          (<span data-i18n="edu1_date">2022 – heute</span>)
+        </li>
+        <li>
+          <strong data-i18n="edu2_degree">B.Eng. Computertechnik</strong>,
+          <span data-i18n="edu2_school"
+            >Islamische Azad Universität (Teheran Nord)</span
+          >
+          (<span data-i18n="edu2_date">2016 – 2020</span>)
+        </li>
+      </ul>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2 data-i18n="skillsTitle">Kenntnisse</h2>
+      <div class="skill">
+        <span class="skill-name">Python</span>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="90"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span class="skill-name">JavaScript/TypeScript</span>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="85"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span class="skill-name">HTML/CSS</span>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="90"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span class="skill-name">SQL/Neo4j</span>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="80"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span class="skill-name">Flask/FastAPI</span>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="85"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span class="skill-name" data-i18n="skillML">Maschinelles Lernen</span>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="70"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <span class="skill-name" data-i18n="skillNLP">NLP</span>
+        <div class="skill-bar">
+          <div class="skill-level" data-level="75"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2 data-i18n="projectsTitle">Projekte</h2>
+      <div class="project">
+        <h3 data-i18n="proj1_title">Projekt 1</h3>
+        <p data-i18n="proj1_desc">
+          Kurzbeschreibung des Projekts (Platzhalter).
+        </p>
+      </div>
+      <div class="project">
+        <h3 data-i18n="proj2_title">Projekt 2</h3>
+        <p data-i18n="proj2_desc">
+          Kurzbeschreibung des Projekts (Platzhalter).
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2 data-i18n="contactTitle">Kontakt</h2>
+      <ul class="contact-list">
+        <li>
+          <a href="mailto:mo.seyedalizadeh@gmail.com">
+            <span data-i18n="contactEmail">E-Mail:</span>
+            mo.seyedalizadeh@gmail.com
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/moslz" target="_blank">
+            <img src="resources/github.png" alt="GitHub" class="icon" /> GitHub
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/mohammad-seyedalizadeh-1809a8155/"
+            target="_blank"
+          >
+            <img src="resources/linkedin.png" alt="LinkedIn" class="icon" />
+            LinkedIn
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- JavaScript file -->
+    <script src="script.js"></script>
+  </body>
 </html>
