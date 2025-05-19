@@ -2,15 +2,15 @@
 :root {
   --bg-color: #ffffff;
   --text-color: #333333;
-  --accent-color: #4caf50;      /* accent color for highlights (e.g., skill bars) */
-  --muted-color: #777777;       /* secondary text color */
-  --section-bg-color: #f9f9f9;  /* background for sections (optional) */
+  --accent-color: #4caf50;      
+  --muted-color: #777777;       
+  --section-bg-color: #f9f9f9;  
 }
 body.dark {
   --bg-color: #121212;
   --text-color: #e0e0e0;
   --section-bg-color: #1e1e1e;
-  --accent-color: #4caf50;      /* accent can remain same or adjust for dark */
+  --accent-color: #4caf50;      
   --muted-color: #aaaaaa;
 }
 /* Apply theme colors */
@@ -21,7 +21,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  scroll-behavior: smooth;  /* Smooth scrolling for whole page :contentReference[oaicite:9]{index=9} */
+  scroll-behavior: smooth;  
 }
 /* Headings and text */
 h1, h2, h3, h4 {
@@ -40,7 +40,7 @@ section {
 }
 section#home {
   position: relative;
-  min-height: 100vh; /* full viewport height */
+  min-height: 100vh; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -296,5 +296,168 @@ body.dark .icon {
   }
   .skill-bar {
     width: 100%;
+  }
+}
+
+/* Engaging code editor window on the home page */
+.code-window {
+  background: #1e1e2e;
+  border-radius: 8px;
+  padding-top: 2rem;
+  width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  position: relative;
+  font-family: 'Fira Code', monospace;
+}
+
+.code-window .code-controls {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.code-window .control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+}
+
+.code-window .control.red    { background: #ff5f56; }
+.code-window .control.yellow { background: #ffbd2e; }
+.code-window .control.green  { background: #27c93f; }
+
+.code-window pre {
+  margin: 0;
+  padding: 1rem;
+  border-top: 1px solid #2a2a3b;
+  color: #cdd6f4;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  overflow-x: auto;
+}
+
+.code-window .cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── Home Section: two-column on desktop, single column on mobile ── */
+section#home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  padding: 4rem 1rem;
+}
+
+/* Desktop: side-by-side */
+@media (min-width: 900px) {
+  section#home {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  /* Left column: intro-container */
+  #home .intro-container {
+    flex: 0 0 350px;  
+  }
+  /* Right column: code window */
+  .code-window {
+    flex: 0 0 600px;   
+    margin: 0;        
+  }
+}
+
+/* Mobile fallback: stack and full-width */
+@media (max-width: 899px) {
+  .code-window,
+  #home .intro-container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 900px) {
+  /* Keep picture & text side by side, no wrapping */
+  #home .intro-container {
+    flex-wrap: nowrap;       
+    flex: 0 0 auto;          
+    display: flex;           
+    align-items: center;     
+  }
+
+  /* Never break name or tagline onto multiple lines */
+  #home .intro-text h1,
+  #home .intro-text .tagline {
+    white-space: nowrap;
+  }
+}
+
+/* ── Custom Home Layout Overrides ── */
+@media (min-width: 900px) {
+  section#home {
+    display: block;
+    position: relative;
+    padding: 4rem 2rem;
+    min-height: 100vh;
+  }
+
+  /* Photo and text side by side */
+  #home .intro-container {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    flex-direction: row;   
+    align-items: center;     
+    text-align: left;
+    flex-wrap: nowrap;
+  }
+
+    /* Name and tagline stacked under each other */
+  #home .intro-text {
+    display: flex;
+    flex-direction: column;  
+    align-items: flex-start;   
+    gap: 0.25rem;              
+  }
+  #home .intro-text h1,
+  #home .intro-text .tagline {
+    white-space: normal;        
+    margin: 0;                  
+  }
+
+  .code-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+}
+
+@media (max-width: 899px) {
+  section#home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  #home .intro-container,
+  .code-window {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
   }
 }

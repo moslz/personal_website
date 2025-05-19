@@ -1,3 +1,23 @@
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('live-code').textContent = codeString;
+});
+
+// Engaging code editor window on the home page
+const codeString = `const profile = (...qualities) =>
+  'With my ' + qualities.slice(0, -1).join(', ') +
+  ', and ' + qualities.at(-1) +
+  ', I’m poised to drive innovation ' +
+  'and collaborate effectively.';
+
+console.log(
+  profile(
+    'good programming skills',
+    'ability to work in a team',
+    'eagerness to learn more',
+    'a Computer Science degree'
+  )
+);`;
+
 // Translation content for multi-language support
 const translations = {
   "de": {
