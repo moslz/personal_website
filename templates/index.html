@@ -10,7 +10,10 @@
       rel="stylesheet"
     />
     <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
 
   <body>
@@ -48,7 +51,7 @@
       <div class="intro-container">
         <!-- Profile picture -->
         <img
-          src="resources/Img_profile_1.PNG"
+          src="{{ url_for('static', filename='resources/Img_profile_1.PNG') }}"
           alt="Profile Picture"
           class="profile-pic"
         />
@@ -72,7 +75,11 @@
 
       <!-- Down arrow to scroll to About section -->
       <a href="#about" class="down-arrow-link" aria-label="Scroll Down">
-        <img src="resources/arrow.png" alt="" class="down-arrow icon" />
+        <img
+          src="{{ url_for('static', filename='resources/arrow.png') }}"
+          alt=""
+          class="down-arrow icon"
+        />
       </a>
     </section>
 
@@ -115,7 +122,11 @@
       <h2 data-i18n="expTitle">Erfahrung</h2>
       <!-- Work Experience -->
       <h3>
-        <img src="experience.png" alt="" class="icon section-icon" />
+        <img
+          src="{{ url_for('static', filename='resources/experience.png') }}"
+          alt=""
+          class="icon section-icon"
+        />
         <span data-i18n="workTitle">Berufserfahrung</span>
       </h3>
       <ul class="experience-list work-list">
@@ -138,7 +149,11 @@
       </ul>
       <!-- Education -->
       <h3>
-        <img src="education.png" alt="" class="icon section-icon" />
+        <img
+          src="{{ url_for('static', filename='resources/education.png') }}"
+          alt=""
+          class="icon section-icon"
+        />
         <span data-i18n="eduTitle">Ausbildung</span>
       </h3>
       <ul class="experience-list edu-list">
@@ -233,7 +248,12 @@
         </li>
         <li>
           <a href="https://github.com/moslz" target="_blank">
-            <img src="resources/github.png" alt="GitHub" class="icon" /> GitHub
+            <img
+              src="{{ url_for('static', filename='resources/github.png') }}"
+              alt="GitHub"
+              class="icon"
+            />
+            GitHub
           </a>
         </li>
         <li>
@@ -241,7 +261,11 @@
             href="https://www.linkedin.com/in/mohammad-seyedalizadeh-1809a8155/"
             target="_blank"
           >
-            <img src="resources/linkedin.png" alt="LinkedIn" class="icon" />
+            <img
+              src="{{ url_for('static', filename='resources/linkedin.png') }}"
+              alt="LinkedIn"
+              class="icon"
+            />
             LinkedIn
           </a>
         </li>
@@ -249,6 +273,6 @@
     </section>
 
     <!-- JavaScript file -->
-    <script src="script.js"></script>
+    <script src="/my_website/static/js/script.js"></script>
   </body>
 </html>
