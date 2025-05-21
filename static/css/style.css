@@ -349,7 +349,7 @@ body.dark .icon {
   50% { opacity: 0; }
 }
 
-/* ── Home Section: two-column on desktop, single column on mobile ── */
+/* Home Section: two-column on desktop, single column on mobile */
 section#home {
   display: flex;
   flex-direction: column;
@@ -402,7 +402,7 @@ section#home {
   }
 }
 
-/* ── Custom Home Layout Overrides ── */
+/* Custom Home Layout Overrides */
 @media (min-width: 900px) {
   section#home {
     display: block;
