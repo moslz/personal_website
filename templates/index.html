@@ -14,6 +14,11 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <!-- Prism for Engaging code editor window -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css"
+    />
   </head>
 
   <body>
@@ -70,7 +75,9 @@
           <span class="control yellow"></span>
           <span class="control green"></span>
         </div>
-        <pre><code id="live-code"></code><span class="cursor">|</span></pre>
+        <pre
+          class="language-javascript"
+        ><code id="live-code" class="language-javascript"></code><span class="cursor">|</span></pre>
       </div>
 
       <!-- Down arrow to scroll to About section -->
@@ -273,6 +280,25 @@
     </section>
 
     <!-- JavaScript file -->
-    <script src="/my_website/static/js/script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/prismjs@1.29/components/prism-core.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/prismjs@1.29/components/prism-clike.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/prismjs@1.29/components/prism-javascript.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/prismjs@1.29/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"
+      defer
+    ></script>
+    <script
+      src="{{ url_for('static', filename='js/script.js') }}"
+      defer
+    ></script>
   </body>
 </html>

@@ -1,5 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('live-code').textContent = codeString;
+  const codeEl = document.getElementById('live-code');
+  codeEl.textContent = codeString;         
+  Prism.highlightElement(codeEl);           
 });
 
 // Engaging code editor window on the home page
