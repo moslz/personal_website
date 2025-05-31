@@ -4,6 +4,14 @@ window.addEventListener('DOMContentLoaded', () => {
   Prism.highlightElement(codeEl);           
 });
 
+// Chat UI constants 
+const toggleBtn   = document.getElementById('chatbot-toggle');
+const chatBox     = document.getElementById('chatbot-container');
+const closeBtn    = document.getElementById('chatbot-close');
+const msgArea     = document.getElementById('chatbot-messages');
+const form        = document.getElementById('chatbot-form');
+const input       = document.getElementById('chatbot-input');
+
 // Engaging code editor window on the home page
 const codeString = `const profile = (...qualities) =>
   'With my ' + qualities.slice(0, -1).join(', ') +
@@ -185,3 +193,69 @@ window.addEventListener('scroll', () => {
     }
   }
 });
+
+
+// helpers for chatbot
+const el = (tag, cls) => { const n=document.createElement(tag); n.className=cls; return n; };
+
+function appendUser(text){
+  const row = el('div','chat-row'),
+        b   = el('div','user-msg');
+  b.textContent = text.trim();
+  row.appendChild(b);
+  msgArea.appendChild(row);
+}
+
+function appendThinking(){
+  const row = el('div','chat-row'),
+        b   = el('div','bot-msg'),
+        dots= el('div','bot-thinking');
+  ['','',''].forEach(()=>dots.appendChild(el('span','')));
+  b.appendChild(dots);
+  row.appendChild(b);
+  msgArea.appendChild(row);
+  return b;         // return the bubble so we can replace it later
+}
+
+function appendBot(text, replaceNode){
+  const row = el('div','chat-row'),
+        b   = el('div','bot-msg');
+  b.textContent = text;
+  row.appendChild(b);
+  if(replaceNode) replaceNode.parentNode.replaceWith(row);
+  else msgArea.appendChild(row);
+}
+
+// open, close 
+function openChat(){
+  chatBox.classList.remove('hidden');
+  chatBox.classList.add('show');
+  input.focus();
+}
+function closeChat(){
+  chatBox.classList.add('hidden');
+  chatBox.classList.remove('show');
+}
+
+// event wiring 
+toggleBtn.addEventListener('click', openChat);
+closeBtn .addEventListener('click', closeChat);
+
+form.addEventListener('submit', e=>{
+  e.preventDefault();
+  const text = input.value;
+  if(!text.trim()) return;
+  appendUser(text);
+  input.value = '';
+
+  // fake bot reply 
+  const thinkingBubble = appendThinking();
+  setTimeout(()=>{
+    appendBot('🤖  (I will answer once you hook me up to an LLM)', thinkingBubble);
+    msgArea.scrollTop = msgArea.scrollHeight;
+  }, 1200);
+});
+
+// auto-scroll when new messages appear 
+const observer = new MutationObserver(()=> msgArea.scrollTop = msgArea.scrollHeight);
+observer.observe(msgArea, {childList:true});
