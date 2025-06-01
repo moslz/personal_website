@@ -147,7 +147,7 @@ langButtons.forEach(btn => {
   });
 });
 
-// Theme toggle (light <-> dark)
+// Theme toggle (light or dark)
 const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
@@ -175,7 +175,7 @@ document.querySelectorAll('#nav-menu a').forEach(link => {
   });
 });
 
-// Skills section animation: fill bars when scrolled into view
+// Skills section animation, fill bars when scrolled into view
 let skillsAnimated = false;
 function animateSkillBars() {
   document.querySelectorAll('.skill-level').forEach(bar => {
@@ -248,14 +248,26 @@ form.addEventListener('submit', e=>{
   appendUser(text);
   input.value = '';
 
-  // fake bot reply 
+  // bot reply 
   const thinkingBubble = appendThinking();
-  setTimeout(()=>{
-    appendBot('🤖  (I will answer once you hook me up to an LLM)', thinkingBubble);
+
+fetch('/api/chat', {
+  method: 'POST',
+  headers: {'Content-Type':'application/json'},
+  body: JSON.stringify({message: text})
+})
+  .then(res => res.ok ? res.json() : Promise.reject(res))
+  .then(data => {
+    appendBot(data.answer || '🤖 …', thinkingBubble);
     msgArea.scrollTop = msgArea.scrollHeight;
-  }, 1200);
+  })
+  .catch(err => {
+    console.error(err);
+    appendBot('⚠️  Sorry, the assistant is unavailable.', thinkingBubble);
+  });
+
 });
 
-// auto-scroll when new messages appear 
+// auto-scroll on new messages appear 
 const observer = new MutationObserver(()=> msgArea.scrollTop = msgArea.scrollHeight);
 observer.observe(msgArea, {childList:true});
