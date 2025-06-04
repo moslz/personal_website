@@ -12,6 +12,10 @@ const msgArea     = document.getElementById('chatbot-messages');
 const form        = document.getElementById('chatbot-form');
 const input       = document.getElementById('chatbot-input');
 
+// Chat voice constants
+const el = (tag, cls) => { const n=document.createElement(tag); n.className=cls; return n; };
+const playIcon = "▶";   // simple triangle, no extra SVG needed
+
 // Engaging code editor window on the home page
 const codeString = `const profile = (...qualities) =>
   'With my ' + qualities.slice(0, -1).join(', ') +
@@ -194,10 +198,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-
-// helpers for chatbot
-const el = (tag, cls) => { const n=document.createElement(tag); n.className=cls; return n; };
-
 function appendUser(text){
   const row = el('div','chat-row'),
         b   = el('div','user-msg');
@@ -219,11 +219,47 @@ function appendThinking(){
 
 function appendBot(text, replaceNode){
   const row = el('div','chat-row'),
-        b   = el('div','bot-msg');
+        b   = el('div','bot-msg'),
+        p   = el('button','play-btn');
+
   b.textContent = text;
+  p.textContent = playIcon;
+  b.appendChild(p);
   row.appendChild(b);
+
   if(replaceNode) replaceNode.parentNode.replaceWith(row);
   else msgArea.appendChild(row);
+
+let url = null, audioEl = null, loaded = false;
+
+p.addEventListener('click', () => {
+  if (loaded) {                      
+    audioEl.currentTime = 0;
+    audioEl.play().catch(console.error);
+    return;
+  }
+
+  p.disabled = true;
+  fetch('/api/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  })
+  .then(r => r.ok ? r.json() : Promise.reject(r))
+  .then(({ audio }) => {
+    url      = `data:audio/mpeg;base64,${audio}`;
+    audioEl  = new Audio(url);         
+    loaded   = true;
+    p.disabled = false;                 
+    p.textContent = "🔊";                
+  })
+  .catch(err => {
+    console.error(err);
+    p.textContent = "⚠";
+    p.disabled = false;
+  });
+});
+
 }
 
 // open, close 
