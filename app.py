@@ -1,9 +1,6 @@
-import os
-import io, base64, asyncio        
-import edge_tts
-from flask import Flask, render_template, request, jsonify
+import os, io, base64, asyncio, edge_tts 
+from flask import Flask, Response, render_template, request, jsonify, session 
 from together import Together 
-from flask import Response
 
 app = Flask(
     __name__,
@@ -11,6 +8,8 @@ app = Flask(
     static_url_path="/my_website/static",
     template_folder="templates"
 )
+
+app.secret_key = os.getenv("FLASK_SECRET", "dev-only-change-me")
 
 API_KEY = os.getenv("TOGETHER_API_KEY")
 if not API_KEY:
@@ -24,14 +23,11 @@ MODEL = "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free"  # free and capable
 with open("system_prompt.txt", "r", encoding="utf-8") as fh:
     SYSTEM_PROMPT = fh.read().strip()
 
-def remote_llama(user_text: str) -> str:
-    """Call Together chat endpoint and return plain string."""
+def remote_llama(messages) -> str:
+    """Call Together chat endpoint and return assistant reply."""
     resp = client.chat.completions.create(
         model=MODEL,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user",   "content": user_text},
-        ],
+        messages=messages,
         max_tokens=180,
         temperature=0.6,
         top_p=0.9,
@@ -61,17 +57,29 @@ def home():
 
 @app.post("/api/chat")
 def chat():
-    data      = request.get_json(force=True)
-    user_text = (data.get("message") or "").strip()
-
+    user_text = (request.get_json(force=True).get("message") or "").strip()
     if not user_text:
         return jsonify({"answer": "Ask me something 🙂"}), 400
 
+    history = session.get("history", [])
+
+    messages = (
+        [{"role": "system", "content": SYSTEM_PROMPT}]
+        + history
+        + [{"role": "user", "content": user_text}]
+    )
+
     try:
-        answer = remote_llama(user_text)
-    except Exception as exc:                     
+        answer = remote_llama(messages)
+    except Exception as exc:
         print("LLM error:", exc)
         return jsonify({"answer": "⚠️  Sorry, the assistant is unavailable."}), 503
+
+    history += [
+        {"role": "user", "content": user_text},
+        {"role": "assistant", "content": answer},
+    ]
+    session["history"] = history[-10:]
 
     return jsonify({"answer": answer})
 
@@ -90,8 +98,6 @@ def tts():
     # encode to Base-64 so front-end can use data: URI
     b64_audio = base64.b64encode(mp3_bytes).decode("ascii")
     return jsonify({"audio": b64_audio})
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)
